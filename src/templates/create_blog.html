@@ -1,0 +1,37 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<div class="container-fluid">
+        <div class="row">
+            <div class="col-lg-4">
+                <div class="container my-1h">
+                    <h1>Create New Blog</h1>
+                </div>
+                </br>
+                <form method="post" novalidate>
+                    
+                    {% for field in form %}
+    
+                        <div class="field-wrapper {% if field.errors %}field-error{% endif %}">
+
+                                {{ field.label }}
+                                {{ field }}
+
+                            {% if field.errors %}
+                                <cite class="d-block c-red mb-1h">{{ field.errors|join(' ') }}</cite>
+                            {% elif field.description %}
+                                <cite class="d-block muted mb-h">{{ field.description|safe }}</cite>
+                            {% endif %}
+                        </div>
+                    
+                    {% endfor %}
+
+                <button style="float: left" type="submit" class="button button-primary">Save</button>
+            
+            </form>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

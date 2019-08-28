@@ -9,7 +9,6 @@ from starlette.staticfiles import StaticFiles
 
 from app import admin, db, endpoints, globals, handlers, settings
 
-
 # config
 starlette_admin.config.logout_url = "/auth/logout"
 starlette_auth.config.change_pw_template = "starlette_admin/auth/change_password.html"
@@ -27,7 +26,10 @@ app = Starlette(debug=settings.DEBUG)
 
 # routes
 app.add_route("/", endpoints.Home, methods=["GET"], name="home")
-app.add_route("/blog_admin", endpoints.Blog, methods=["GET"], name="blog")
+app.add_route("/blog_admin", endpoints.BlogAdmin, methods=["GET"], name="blog")
+app.add_route(
+    "/create_blog", endpoints.CreateBlog, methods=["GET", "POST"], name="create_blog"
+)
 
 # sub apps
 app.mount(path="/admin", app=admin.adminsite, name=admin.adminsite.name)

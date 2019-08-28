@@ -8,9 +8,9 @@ $code-font-family:              "Inconsolata", monospace;
 $colors: (
   "primary":                    rgb(26, 162, 220),
   "dovegray":                   rgb(102, 102, 102),
-  "white"                       rgb(255,255,255),
-  "red"                         rgb(255,65,54),
-  "green"                       rgb(46,204,64),
+  "white":                      rgb(255, 255, 255),
+  "red":                        rgb(255, 65, 54),
+  "green":                      rgb(46, 204, 64),
 );
 
 $font-color:                    map-get($colors, "dovegray");
@@ -21,6 +21,6 @@ $input-use-full-width:          true;
 // buttons
 $buttons: (
     // name         color                          font-color
-    danger:         map-get($colors, "red")        map-get($colors, "white")
-    safe:           map-get($colors, "green")        map-get($colors, "white")
+    danger:         map-get($colors, "red")        map-get($colors, "white"),
+    safe:           map-get($colors, "green")      map-get($colors, "white"),
 );

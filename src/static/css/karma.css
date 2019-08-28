@@ -1082,6 +1082,84 @@ button,
   outline: 0;
 }
 
+.button.button-danger {
+  color: white;
+  background-color: #ff4136;
+  border-color: #ff291d;
+}
+
+.button.button-danger:hover, .button.button-danger:focus {
+  color: white;
+  background-color: #ff1103;
+  border-color: #e90d00;
+  outline: 0;
+}
+
+.button.button-outline.button-danger {
+  color: #ff4136;
+  background-color: transparent;
+  border-color: #ff4136;
+}
+
+.button.button-outline.button-danger:hover, .button.button-outline.button-danger:focus {
+  color: #ff1103;
+  background-color: transparent;
+  border-color: #ff1103;
+  outline: 0;
+}
+
+.button.button-clear.button-danger {
+  color: #ff4136;
+  background-color: transparent;
+  border-color: transparent;
+}
+
+.button.button-clear.button-danger:hover, .button.button-clear.button-danger:focus {
+  color: #ff1103;
+  background-color: transparent;
+  border-color: transparent;
+  outline: 0;
+}
+
+.button.button-safe {
+  color: white;
+  background-color: #2ecc40;
+  border-color: #29b739;
+}
+
+.button.button-safe:hover, .button.button-safe:focus {
+  color: white;
+  background-color: #25a233;
+  border-color: #208e2c;
+  outline: 0;
+}
+
+.button.button-outline.button-safe {
+  color: #2ecc40;
+  background-color: transparent;
+  border-color: #2ecc40;
+}
+
+.button.button-outline.button-safe:hover, .button.button-outline.button-safe:focus {
+  color: #25a233;
+  background-color: transparent;
+  border-color: #25a233;
+  outline: 0;
+}
+
+.button.button-clear.button-safe {
+  color: #2ecc40;
+  background-color: transparent;
+  border-color: transparent;
+}
+
+.button.button-clear.button-safe:hover, .button.button-clear.button-safe:focus {
+  color: #25a233;
+  background-color: transparent;
+  border-color: transparent;
+  outline: 0;
+}
+
 code,
 kbd,
 pre,
