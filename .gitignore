@@ -1,0 +1,10 @@
+.postgres
+**__pycache__**
+*.coverage
+*.log
+*.pyc
+.DS_Store
+.idea
+.mypy_cache
+node_modules
+htmlcov
