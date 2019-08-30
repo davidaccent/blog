@@ -34,16 +34,16 @@ app.add_route(
     name="create_blog",
 )
 app.add_route(
-    "/blog_admin/{blog_id:int}/view_blog/edit_blog",
-    endpoints.EditBlog,
-    methods=["GET"],
-    name="edit_blog",
-)
-app.add_route(
     "/blog_admin/{blog_id:int}/view_blog",
     endpoints.ViewBlog,
     methods=["GET"],
     name="view_blog",
+)
+app.add_route(
+    "/blog_admin/{blog_id:int}/view_blog/edit_blog",
+    endpoints.EditBlog,
+    methods=["GET", "POST"],
+    name="edit_blog",
 )
 
 # sub apps

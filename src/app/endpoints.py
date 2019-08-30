@@ -78,7 +78,7 @@ class EditBlog(HTTPEndpoint):
         return templates.TemplateResponse(template, context)
 
     @requires("authenticated", redirect="auth:login")
-    async def get(self, request):
+    async def post(self, request):
         blog_id = request.path_params["blog_id"]
         blog = Blog.query.get_or_404(blog_id)
 
