@@ -16,15 +16,17 @@ class Home(HTTPEndpoint):
 
 
 class BlogAdmin(HTTPEndpoint):
-    @requires(["authenticated"])
+    @requires("authenticated", redirect="auth:login")
     async def get(self, request):
+        blogs = Blog.query.all()
+
         template = "blog_admin.html"
-        context = {"request": request}
+        context = {"request": request, "blogs": blogs}
         return templates.TemplateResponse(template, context)
 
 
 class CreateBlog(HTTPEndpoint):
-    @requires(["authenticated"])
+    @requires("authenticated", redirect="auth:login")
     async def get(self, request):
         form = BlogForm()
 
@@ -32,23 +34,68 @@ class CreateBlog(HTTPEndpoint):
         context = {"request": request, "form": form}
         return templates.TemplateResponse(template, context)
 
-
+    @requires("authenticated", redirect="auth:login")
     async def post(self, request):
-
         data = await request.form()
         form = BlogForm(data)
-
         if not form.validate():
             template = "create_blog.html"
             context = {"request": request, "form": form}
             return templates.TemplateResponse(template, context)
+        blog = Blog(
+            title=form.title.data,
+            meta_description=form.meta_description.data,
+            author=form.author.data,
+            post_body=form.post_body.data,
+            is_live=form.is_live.data,
+            created_by=request.user,
+            last_updated_by=request.user,
+        )
+        blog.save()
+        return RedirectResponse(url=request.url_for("blog_admin"), status_code=302)
 
-        blog = Blog
+
+class ViewBlog(HTTPEndpoint):
+    @requires("authenticated", redirect="auth:login")
+    async def get(self, request):
+        blog_id = request.path_params["blog_id"]
+        blog = Blog.query.get_or_404(blog_id)
+        
+        template = "view_blog.html"
+        context = {"request": request, "blog": blog}
+        return templates.TemplateResponse(template, context)
+
+
+class EditBlog(HTTPEndpoint):
+    @requires("authenticated", redirect="auth:login")
+    async def get(self, request):
+        blog_id = request.path_params["blog_id"]
+        blog = Blog.query.get_or_404(blog_id)
+        form = BlogForm(obj=blog)
+        
+        template = "edit_blog.html"
+        context = {"request": request, "blog": blog, "form": form}
+        return templates.TemplateResponse(template, context)
+
+    @requires("authenticated", redirect="auth:login")
+    async def get(self, request):
+        blog_id = request.path_params["blog_id"]
+        blog = Blog.query.get_or_404(blog_id)
+
+        data = await request.form()
+        form = BlogForm(data, obj=blog)
+
+        if not form.validate():
+            template = "edit_blog.html"
+            context = {"request": request, "blog": blog, "form": form}
+            return templates.TemplateResponse(template, context)
+
         blog.title = form.title.data
         blog.meta_description = form.meta_description.data
-        blog.author = form.author.data
         blog.post_body = form.post_body.data
+        blog.author = form.author.data
+        blog.is_live = form.is_live.data
 
         blog.save()
 
-        return RedirectResponse(url=request.url_for("blog_admin"), status_code=302)
+        return RedirectResponse(url=request.url_for("view_blog"), status_code=302)

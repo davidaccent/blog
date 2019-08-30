@@ -26,9 +26,24 @@ app = Starlette(debug=settings.DEBUG)
 
 # routes
 app.add_route("/", endpoints.Home, methods=["GET"], name="home")
-app.add_route("/blog_admin", endpoints.BlogAdmin, methods=["GET"], name="blog")
+app.add_route("/blog_admin", endpoints.BlogAdmin, methods=["GET"], name="blog_admin")
 app.add_route(
-    "/create_blog", endpoints.CreateBlog, methods=["GET", "POST"], name="create_blog"
+    "/blog_admin/create_blog",
+    endpoints.CreateBlog,
+    methods=["GET", "POST"],
+    name="create_blog",
+)
+app.add_route(
+    "/blog_admin/{blog_id:int}/view_blog/edit_blog",
+    endpoints.EditBlog,
+    methods=["GET"],
+    name="edit_blog",
+)
+app.add_route(
+    "/blog_admin/{blog_id:int}/view_blog",
+    endpoints.ViewBlog,
+    methods=["GET"],
+    name="view_blog",
 )
 
 # sub apps

@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<div class="container-fluid">
+    <div class="container my-1h">
+        <h1>{{ blog.title }}</h1>
+        <h3>{{ blog.meta_description }}</h3>
+        
+        <body>
+            <p>{{ blog.post_body }}</p>
+        </body>
+        
+        <footer>
+                <p>By {{ blog.author }}</p>
+                <p>Created: {{ blog.created }}</p>
+        </footer>
+        <a href="{{ url_for('blog_admin') }}"  class="button button-safe">Back</a>
+        <a href="{{ url_for('edit_blog', blog_id=blog.id) }}"  class="button button-danger">Edit</a>
+    </div>
+</div>
+{% endblock %}

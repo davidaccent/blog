@@ -11,3 +11,4 @@ db = Database(settings.DATABASE_URL)
 
 # import project and external tables
 from starlette_auth import tables  # noqa isort:skip
+from app.blog import tables  # noqa isort:skip

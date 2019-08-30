@@ -2,8 +2,38 @@
 
 {% block content %}
 <div class="container my-1h">
-    <h3>Active Blogs</h3>
-    {{ lipsum(n=2, html=True, min=20, max=100) }}
-    <a href="{{ url_for('create_blog') }}" class="button button-safe">Create New Blog</a>
+    <h2>Created Blogs</h2>
+    <table class="table table-headed">
+        <thead>
+            <tr>
+                <th>{{ "Title" }}</th>
+                <th>{{ "Author" }}</th>
+                <th>{{ "Created By" }}</th>
+                <th>{{ "Date Created" }}</th>
+                <th>{{ "Status" }}</th>
+                <th>{{ "Update" }}</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for blog in blogs -%}
+            <tr>
+                {# for item in blog #}
+                    <td><Strong>{{ blog.title|e }}</Strong></td>
+                    <td>{{ blog.author|e }}</td>
+                    <td>{{ blog.created_by|e }}</td>
+                    <td>{{ blog.created|e }}</td>
+                    {% if blog.is_live %}
+                        <td style="color:green;"><Strong>{{ "Active" }}</Strong></td>
+                    {% else %}
+                        <td style="color:red;"><Strong>{{ "Inactive" }}</Strong></td>
+                    {% endif %}             
+                    <td><a href="{{ url_for('view_blog', blog_id=blog.id) }}" class="button button-secondary">View</a></td>
+                {# endfor #}
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ url_for('create_blog') }}" class="button button-primary">Create New Blog</a>
 </div>
 {% endblock %}

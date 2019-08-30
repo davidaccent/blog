@@ -1,0 +1,45 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-lg-4">
+            <div class="container my-1h">
+                <h1>Review Blog</h1>
+            </div>
+            </br>
+            <form method="post" novalidate>
+                
+                {% for field in form %}
+
+                    <div class="field-wrapper {% if field.errors %}field-error{% endif %}">
+                        {% if field.type == "BooleanField" %}
+                            <br/>
+                            <div class="checkbox">
+                                <label for="{{ field.id }}">
+                                    {{ field }}{{ field.label.text }}
+                                </label>
+                            </div>                                
+                        {% else %}
+                            {{ field.label }}
+                            {{ field }}
+                        {% endif %}
+                        {% if field.errors %}
+                            <cite class="d-block c-red mb-1h">{{ field.errors|join(' ') }}</cite>
+                        {% elif field.description %}
+                            <cite class="d-block muted mb-h">{{ field.description|safe }}</cite>
+                        {% endif %}
+                    </div>
+
+                {% endfor %}
+
+                </br>
+                <button style="float: left" type="submit" class="button button-safe">Save</button>
+                <button style="float: right" type="submit" class="button button-danger">Delete</button>
+            </form>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

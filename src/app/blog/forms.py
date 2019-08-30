@@ -17,3 +17,4 @@ class BlogForm(form.Form):
     meta_description = fields.StringField(validators=[validators.optional()])
     author = fields.StringField(validators=[validators.InputRequired()])
     post_body = fields.StringField(validators=[validators.optional()])
+    is_live = fields.BooleanField(validators=[validators.optional()])

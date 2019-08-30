@@ -17,7 +17,7 @@
     {% block header %}
     <header class="py-1">
         <div class="container d-flex">
-            <div class="h2 m-0"><a href="/">Starlette Blog</a></div>
+            <div class="h2 m-0"><a href="/">Starlette Blogger</a></div>
             <div class="ml-auto">
                 {% if request.user.is_authenticated %}
                 <a href="{{ url_for('auth:change_password') }}">Change Password</a>

@@ -19,3 +19,6 @@ class Blog(Base, Timestamp):
 
     created_by = orm.relationship("User", foreign_keys=[created_by_id])
     last_updated_by = orm.relationship("User", foreign_keys=[last_updated_by_id])
+
+    def __str__(self):
+        return str(self.id)
