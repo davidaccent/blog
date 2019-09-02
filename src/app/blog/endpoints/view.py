@@ -7,8 +7,12 @@ from app.blog.tables import Blog
 from app.globals import templates
 
 
-class Home(HTTPEndpoint):
+class ViewBlog(HTTPEndpoint):
+    @requires("authenticated", redirect="auth:login")
     async def get(self, request):
-        template = "home.html"
-        context = {"request": request}
+        blog_id = request.path_params["blog_id"]
+        blog = Blog.query.get_or_404(blog_id)
+
+        template = "blog/view_blog.html"
+        context = {"request": request, "blog": blog}
         return templates.TemplateResponse(template, context)

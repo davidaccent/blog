@@ -10,7 +10,7 @@ def test_valid():
         "meta_description": "This is Bundys test blog",
         "author": "Ted Bundy",
         "post_body": "Article about something amazing",
-        "is_live": False,
+        "is_live": True,
     }
     form = BlogForm(DummyPostData(data))
     assert form.validate()

@@ -8,6 +8,7 @@ from starlette.middleware.sessions import SessionMiddleware
 from starlette.staticfiles import StaticFiles
 
 from app import admin, db, endpoints, globals, handlers, settings
+from app.blog.main import app as blog_app
 
 # config
 starlette_admin.config.logout_url = "/auth/logout"
@@ -26,29 +27,11 @@ app = Starlette(debug=settings.DEBUG)
 
 # routes
 app.add_route("/", endpoints.Home, methods=["GET"], name="home")
-app.add_route("/blog_admin", endpoints.BlogAdmin, methods=["GET"], name="blog_admin")
-app.add_route(
-    "/blog_admin/create_blog",
-    endpoints.CreateBlog,
-    methods=["GET", "POST"],
-    name="create_blog",
-)
-app.add_route(
-    "/blog_admin/{blog_id:int}/view_blog",
-    endpoints.ViewBlog,
-    methods=["GET"],
-    name="view_blog",
-)
-app.add_route(
-    "/blog_admin/{blog_id:int}/view_blog/edit_blog",
-    endpoints.EditBlog,
-    methods=["GET", "POST"],
-    name="edit_blog",
-)
 
 # sub apps
 app.mount(path="/admin", app=admin.adminsite, name=admin.adminsite.name)
 app.mount(path="/auth", app=starlette_auth.app, name="auth")
+app.mount(path="/blog", app=blog_app, name="blog")
 
 # static app
 app.mount(

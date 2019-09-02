@@ -27,13 +27,13 @@
                     {% else %}
                         <td style="color:red;"><Strong>{{ "Inactive" }}</Strong></td>
                     {% endif %}             
-                    <td><a href="{{ url_for('view_blog', blog_id=blog.id) }}" class="button button-secondary">View</a></td>
+                    <td><a href="{{ url_for('blog:view_blog', blog_id=blog.id) }}" class="button button-secondary">View</a></td>
                 {# endfor #}
             </tr>
             {% endfor %}
         </tbody>
     </table>
 
-    <a href="{{ url_for('create_blog') }}" class="button button-primary">Create New Blog</a>
+    <a href="{{ url_for('blog:create_blog') }}" class="button button-primary">Create New Blog</a>
 </div>
 {% endblock %}
