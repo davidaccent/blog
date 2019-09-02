@@ -11,7 +11,7 @@ class DeleteBlog(HTTPEndpoint):
     async def get(self, request):
         blog_id = request.path_params["blog_id"]
         blog = Blog.query.get_or_404(blog_id)
-        
+
         template = "blog/delete_blog.html"
         context = {"request": request, "blog": blog}
         return templates.TemplateResponse(template, context)
@@ -20,7 +20,7 @@ class DeleteBlog(HTTPEndpoint):
     async def post(self, request):
         blog_id = request.path_params["blog_id"]
         blog = Blog.query.get_or_404(blog_id)
-        
+
         blog.delete()
 
-        return RedirectResponse(url=request.url_for('blog:blog_admin'), status_code=302)
+        return RedirectResponse(url=request.url_for("blog:blog_admin"), status_code=302)

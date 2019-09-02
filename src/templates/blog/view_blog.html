@@ -13,7 +13,7 @@
         
         <footer>
                 <p>By {{ blog.author }}</p>
-                <p>Created: {{ blog.created }}</p>
+                <p>{{ blog.created.strftime('%Y-%m-%d %H:%M:%S') }}</p>
         </footer>
         <a href="{{ url_for('blog:blog_admin') }}"  class="button button-safe">Back</a>
         <a href="{{ url_for('blog:edit_blog', blog_id=blog.id) }}"  class="button button-danger">Edit</a>
