@@ -28,5 +28,11 @@ app = Router(
             methods=["GET", "POST"],
             name="edit_blog",
         ),
+        Route(
+            "/blog_admin/{blog_id:int}/view_blog/edit_blog/delete_blog",
+            endpoints.DeleteBlog,
+            methods=["GET", "POST"],
+            name="delete_blog",
+        ),
     ]
 )

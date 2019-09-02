@@ -15,7 +15,10 @@
 
                     <div class="field-wrapper {% if field.errors %}field-error{% endif %}">
                         {% if field.type == "BooleanField" %}
-                            <br/>
+                        </br>
+                            {% if not msg == "none" %}
+                                <h3 style="color:red;">{{ msg }}</h3>
+                            {% endif %}
                             <div class="checkbox">
                                 <label for="{{ field.od }}">
                                     {{ field }}{{ field.label.text }}
@@ -36,7 +39,7 @@
 
                 </br>
                 <button style="float: left" type="submit" class="button button-safe">Save</button>
-                <button style="float: right" type="submit" class="button button-danger">Delete</button>
+                <a style="float: right" href="{{ url_for('blog:delete_blog', blog_id=blog.id) }}"  class="button button-danger">Delete</a>
             </form>
         </div>
     </div>

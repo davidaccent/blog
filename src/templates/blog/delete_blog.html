@@ -1,0 +1,41 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container-fluid"></div>
+    <div class="container my-1h">
+        <br></br>
+        <h1>Warning! Are you sure you wish to delete this Blog?</h1>
+        <p><em>You will not be able to undo this action.</em></p>
+        <table class="table table-headed">
+            <thead>
+                <tr>
+                    <th>{{ "Title" }}</th>
+                    <th>{{ "Author" }}</th>
+                    <th>{{ "Description" }}</th>
+                    <th>{{ "Status" }}</th>
+                    <th>{{ "Date Created" }}</th>
+                </tr>
+            </thead>
+            <tbody>
+            <tr>
+                {# for item in blog #}
+                <td>{{ blog.title }}</td>
+                <td>{{ blog.author }}</td>
+                <td>{{ blog.meta_description }}</td>
+                    {% if blog.is_live %}
+                        <td>{{ "Active" }}</td>
+                    {% else %}
+                        <td>{{ "Inactive" }}</td>
+                    {% endif %}
+                <td>{{ blog.created }}</td>
+                {# endfor #}
+            </tr>
+            <tbody>
+        </table>
+        <form method=POST> 
+            <button style="float: left" type="submit" class="button button-danger">Delete</button>
+        </form>
+            <a style="float: right" href="{{ url_for('blog:blog_admin') }}"  class="button button-safe">Cancel</a>
+    </div>
+</div>
+{% endblock %}

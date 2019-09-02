@@ -14,15 +14,25 @@
                     {% for field in form %}
 
                         <div class="field-wrapper {% if field.errors %}field-error{% endif %}">
-
-                            {{ field.label }}
-
-                            {% if field.post_body %}
-                                <!-- TODO increase hight of post field box -->
-                                {{ field }}
                             
+                            {% if field.type == "BooleanField" %}
+                                </br>
+                                {% if not msg == "none" %}
+                                    <h3 style="color:red;">{{ msg }}</h3>
+                                {% endif %}
+                                <div class="checkbox">
+                                    <label for="{{ field.od }}">
+                                        {{ field }}{{ field.label.text }}
+                                    </label>
+                                </div>                                
                             {% else %}
-                                {{ field }}
+                                {{ field.label }}
+                                {% if field.post_body %}
+                                    <!-- TODO increase hight of post field box -->
+                                    {{ field }} 
+                                {% else %}
+                                    {{ field }}
+                                {% endif %}
                             {% endif %}
 
                             {% if field.errors %}
