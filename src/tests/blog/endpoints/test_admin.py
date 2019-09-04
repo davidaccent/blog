@@ -6,7 +6,7 @@ def test_login_required(client):
     assert response.url == "http://testserver/auth/login"
 
 
-def test_login_grans_access(client, login):
+def test_login_grants_access(client, login):
     url = client.app.url_path_for("blog:blog_admin")
     response = client.get(url)
 
@@ -25,12 +25,12 @@ def test_table_generation(client, login):
     url = client.app.url_path_for("blog:blog_admin")
     # blog_data = blog
     response = client.get(url)
+
     assert "<th>Title</th>" in response.text
     assert "<th>Author</th>" in response.text
     assert "<th>Created By</th>" in response.text
     assert "<th>Date Created</th>" in response.text
     assert "<th>Status</th>" in response.text
-    assert "<th>Update</th>" in response.text
 
     # assert blog_data.title in response
     # assert blog_data.author in response

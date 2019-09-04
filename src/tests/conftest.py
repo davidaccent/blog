@@ -63,7 +63,7 @@ def blog(user):
     from app.blog.tables import Blog
 
     object = Blog(
-        title="test", author="Ted", created_by_id=user.id, last_updated_by_id=user.id
+        title="Test", author="Ted", created_by_id=user.id, last_updated_by_id=user.id
     )
     object.save()
 

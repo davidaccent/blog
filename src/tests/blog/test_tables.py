@@ -13,3 +13,7 @@ def test_fields():
     assert_model_field(Blog, "post_body", sa.String, True, False, False)
     assert_model_field(Blog, "last_updated_by_id", sa.Integer, False, False, False)
     assert_model_field(Blog, "is_live", sa.Boolean, False, False, False)
+
+
+def test_table_returns_id():
+    assert str(Blog(id=1)) == "1"

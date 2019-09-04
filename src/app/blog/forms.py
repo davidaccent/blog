@@ -1,4 +1,4 @@
-from wtforms import fields, form, validators
+from wtforms import ValidationError, fields, form, validators
 from wtforms.ext.sqlalchemy.fields import QuerySelectField
 from wtforms.ext.sqlalchemy.orm import model_form
 from wtforms_alchemy import ModelForm as BaseModelForm

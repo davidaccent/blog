@@ -17,7 +17,7 @@ def test_valid():
     assert form.data == data
 
 
-def test_valid_missing():
+def test_valid_with_missing_data():
     data = {
         "title": "Bundys Blog",
         "meta_description": "",
@@ -28,6 +28,19 @@ def test_valid_missing():
     form = BlogForm(DummyPostData(data))
     assert form.validate()
     assert form.data == data
+
+
+def test_is_live_invalid():
+    data = {
+        "title": "Bundys Blog",
+        "meta_description": "",
+        "author": "Ted Bundy",
+        "post_body": "",
+        "is_live": True,
+    }
+    form = BlogForm(DummyPostData(data))
+    assert not form.validate()
+    assert "is_live" in form.errors
 
 
 def test_unique_contraints(blog):
