@@ -12,11 +12,10 @@
         </body>
         
         <footer>
-                <p>By {{ object.author }}</p>
-                <p>{{ object.created.strftime('%Y-%m-%d %H:%M:%S') }}</p>
+            <p>By {{ object.author }}</p>
+            <p>{{ object.created.strftime('%Y-%m-%d %H:%M:%S') }}</p>
         </footer>
         <a href="{{ url_for('blog:blog_admin') }}"  class="button button-safe">Back</a>
-        <a href="{{ object.urls.edit }}"  class="button button-danger">Edit</a>
     </div>
 </div>
 {% endblock %}

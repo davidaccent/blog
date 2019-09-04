@@ -13,6 +13,6 @@ class BlogAdmin(HTTPEndpoint):
         blogs = Blog.query.all()
 
         template = "blog/blog_admin.html"
-        context = {"request": request, "blogs": blogs}
+        context = {"request": request, "object": blogs}
 
         return templates.TemplateResponse(template, context)

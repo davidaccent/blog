@@ -11,23 +11,24 @@
                 <th>{{ "Created By" }}</th>
                 <th>{{ "Date Created" }}</th>
                 <th>{{ "Status" }}</th>
-                <th>{{ "Update" }}</th>
+                <th>{{ "" }}</th>
             </tr>
         </thead>
         <tbody>
-            {% for blog in blogs -%}
+            {% for items in object -%}
             <tr>
-                {# for item in blog #}
-                    <td><Strong>{{ blog.title|e }}</Strong></td>
-                    <td>{{ blog.author|e }}</td>
-                    <td>{{ blog.created_by|e }}</td>
-                    <td>{{ blog.created.strftime('%Y-%m-%d %H:%M:%S')|e }}</td>
-                    {% if blog.is_live %}
+                {# for item in items #}
+                    <td><Strong>{{ items.title|e }}</Strong></td>
+                    <td>{{ items.author|e }}</td>
+                    <td>{{ items.created_by|e }}</td>
+                    <td>{{ items.created.strftime('%Y-%m-%d %H:%M:%S')|e }}</td>
+                    {% if items.is_live %}
                         <td style="color:green;"><Strong>{{ "Active" }}</Strong></td>
                     {% else %}
                         <td style="color:red;"><Strong>{{ "Inactive" }}</Strong></td>
                     {% endif %}             
-                    <td><a href="{{ url_for('blog:view_blog', blog_id=blog.id) }}" class="button button-secondary">View</a></td>
+                    <td><a href="{{ url_for('blog:view_blog', blog_id=items.id) }}" class="button button-safe">View</a>
+                    <a href="{{ url_for('blog:edit_blog', blog_id=items.id) }}" class="button button-danger">Edit</a></td>
                 {# endfor #}
             </tr>
             {% endfor %}

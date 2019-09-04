@@ -15,6 +15,8 @@
             <button style="float: left" type="submit" class="button button-safe">Save</button>
             {% if object %}
             <a style="float: right" href="{{ object.urls.delete }}"  class="button button-danger">Delete</a>
+            {% else %}
+            <a style="float: right" href="{{ url_for('blog:blog_admin') }}"  class="button button-secondary">Cancel</a>
             {% endif %}
         </form>
     </div>

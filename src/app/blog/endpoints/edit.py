@@ -42,5 +42,5 @@ class EditBlog(HTTPEndpoint):
         blog.save()
 
         return RedirectResponse(
-            url=request.url_for("blog:view_blog", blog_id=blog.id), status_code=302
+            url=request.url_for("blog:blog_admin"), status_code=302
         )
