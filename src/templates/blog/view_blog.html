@@ -4,19 +4,19 @@
 
 <div class="container-fluid">
     <div class="container my-1h">
-        <h1>{{ blog.title }}</h1>
-        <h3>{{ blog.meta_description }}</h3>
+        <h1>{{ object.title }}</h1>
+        <h3>{{ object.meta_description }}</h3>
         
         <body>
-            <p>{{ blog.post_body }}</p>
+            <p>{{ object.post_body }}</p>
         </body>
         
         <footer>
-                <p>By {{ blog.author }}</p>
-                <p>{{ blog.created.strftime('%Y-%m-%d %H:%M:%S') }}</p>
+                <p>By {{ object.author }}</p>
+                <p>{{ object.created.strftime('%Y-%m-%d %H:%M:%S') }}</p>
         </footer>
         <a href="{{ url_for('blog:blog_admin') }}"  class="button button-safe">Back</a>
-        <a href="{{ url_for('blog:edit_blog', blog_id=blog.id) }}"  class="button button-danger">Edit</a>
+        <a href="{{ object.urls.edit }}"  class="button button-danger">Edit</a>
     </div>
 </div>
 {% endblock %}

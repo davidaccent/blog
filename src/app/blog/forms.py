@@ -3,6 +3,8 @@ from wtforms.ext.sqlalchemy.fields import QuerySelectField
 from wtforms.ext.sqlalchemy.orm import model_form
 from wtforms_alchemy import ModelForm as BaseModelForm
 
+from app.blog.tables import Blog
+
 
 class ModelForm(BaseModelForm):
     @classmethod
@@ -12,9 +14,14 @@ class ModelForm(BaseModelForm):
         return Session()
 
 
-class BlogForm(form.Form):
-    title = fields.StringField(validators=[validators.InputRequired()])
-    meta_description = fields.StringField(validators=[validators.optional()])
-    author = fields.StringField(validators=[validators.InputRequired()])
-    post_body = fields.StringField(validators=[validators.optional()])
-    is_live = fields.BooleanField(validators=[validators.optional()])
+class BlogForm(ModelForm):
+    class Meta:
+        model = Blog
+        only = ["title", "meta_description", "author", "post_body", "is_live"]
+
+    def validate_is_live(form, field):
+        if (
+            any([form.meta_description.data == "", form.post_body.data == ""])
+            and field.data
+        ):
+            raise ValidationError("All field must be complete to set blog as live")

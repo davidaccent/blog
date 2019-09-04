@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<div class="container-fluid">
+    <div class="container my-1h">
+        <h1>{% if object %}Review{% else %}Create New{% endif %} Blog</h1>
+        </br>
+        <form method="post" novalidate>
+            {% from "helpers/_form_helpers.html" import render_field %}
+            {% for field in form %}
+                {{ render_field(field) }}
+            {% endfor %}
+            </br>
+            <button style="float: left" type="submit" class="button button-safe">Save</button>
+            {% if object %}
+            <a style="float: right" href="{{ object.urls.delete }}"  class="button button-danger">Delete</a>
+            {% endif %}
+        </form>
+    </div>
+</div>
+
+{% endblock %}

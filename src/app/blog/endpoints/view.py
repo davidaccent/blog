@@ -14,5 +14,5 @@ class ViewBlog(HTTPEndpoint):
         blog = Blog.query.get_or_404(blog_id)
 
         template = "blog/view_blog.html"
-        context = {"request": request, "blog": blog}
+        context = {"request": request, "object": blog}
         return templates.TemplateResponse(template, context)

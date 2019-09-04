@@ -12,19 +12,20 @@ class CreateBlog(HTTPEndpoint):
     async def get(self, request):
         form = BlogForm()
 
-        msg = "none"
-        template = "blog/create_blog.html"
-        context = {"request": request, "form": form, "msg": msg}
+        template = "blog/blog_form.html"
+        context = {"request": request, "form": form}
         return templates.TemplateResponse(template, context)
 
     @requires("authenticated", redirect="auth:login")
     async def post(self, request):
         data = await request.form()
         form = BlogForm(data)
+
         if not form.validate():
-            template = "blog/create_blog.html"
+            template = "blog/blog_form.html"
             context = {"request": request, "form": form}
             return templates.TemplateResponse(template, context)
+
         blog = Blog(
             title=form.title.data,
             meta_description=form.meta_description.data,
@@ -34,16 +35,6 @@ class CreateBlog(HTTPEndpoint):
             created_by=request.user,
             last_updated_by=request.user,
         )
-
-        if (
-            blog.meta_description == "" or blog.post_body == ""
-        ) and blog.is_live == True:
-            blog.is_live = False
-
-            msg = "All field must be complete to set blog as live"
-            template = "blog/create_blog.html"
-            context = {"request": request, "blog": blog, "form": form, "msg": msg}
-            return templates.TemplateResponse(template, context)
 
         blog.save()
 

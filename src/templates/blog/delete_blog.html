@@ -18,17 +18,15 @@
             </thead>
             <tbody>
             <tr>
-                {# for item in blog #}
-                <td>{{ blog.title }}</td>
-                <td>{{ blog.author }}</td>
-                <td>{{ blog.meta_description }}</td>
-                    {% if blog.is_live %}
+                <td>{{ object.title }}</td>
+                <td>{{ object.author }}</td>
+                <td>{{ object.meta_description }}</td>
+                    {% if object.is_live %}
                         <td>{{ "Active" }}</td>
                     {% else %}
                         <td>{{ "Inactive" }}</td>
                     {% endif %}
-                <td>{{ blog.created.strftime('%Y-%m-%d %H:%M:%S') }}</td>
-                {# endfor #}
+                <td>{{ object.created.strftime('%Y-%m-%d %H:%M:%S') }}</td>
             </tr>
             <tbody>
         </table>

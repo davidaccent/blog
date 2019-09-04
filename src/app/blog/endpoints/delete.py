@@ -13,7 +13,7 @@ class DeleteBlog(HTTPEndpoint):
         blog = Blog.query.get_or_404(blog_id)
 
         template = "blog/delete_blog.html"
-        context = {"request": request, "blog": blog}
+        context = {"request": request, "object": blog}
         return templates.TemplateResponse(template, context)
 
     @requires("authenticated", redirect="auth:login")

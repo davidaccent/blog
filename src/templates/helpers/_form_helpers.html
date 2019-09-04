@@ -1,0 +1,16 @@
+
+{% macro render_field(field) %}
+<div {% if field.errors %}class="text-error"{% endif %}>
+    {% if field.type == "BooleanField" %}
+        <label for="{{ field.id }}">{{ field }} {{ field.label.text|replace("_", " ")|title }}</label>
+    {% else %}
+        <label for="{{ field.id }}">{{ field.label.text|replace("_", " ")|title }}</label>
+        {{ field }}
+    {% endif %}
+    {% if field.errors %}
+    <cite>{{ field.errors|join(' ') }}</cite>
+    {% elif field.description %}
+    <cite>{{ field.description }}</cite>
+    {% endif %}
+</div>
+{% endmacro %}

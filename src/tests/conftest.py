@@ -6,7 +6,6 @@ from starlette.testclient import TestClient
 environ["TESTING"] = "TRUE"
 
 from app import db, main, settings  # noqa isort:skip
-from starlette_auth.tables import User  # noqa isort:skip
 from starlette_core.database import Session  # noqa isort:skip
 
 
@@ -26,8 +25,10 @@ def database():
     return dbase
 
 
-@pytest.yield_fixture(scope="function", autouse=False)
+@pytest.fixture
 def user():
+    from starlette_auth.tables import User  # noqa isort:skip
+
     data = {"email": "test@example.com", "first_name": "Test", "last_name": "User"}
 
     try:
@@ -50,3 +51,20 @@ def session(database):
     sess = Session()
     yield sess
     database.truncate_all()
+
+
+@pytest.fixture
+def login(client, user):
+    client.post("/auth/login", data={"email": user.email, "password": "password"})
+
+
+@pytest.fixture
+def blog(user):
+    from app.blog.tables import Blog
+
+    object = Blog(
+        title="test", author="Ted", created_by_id=user.id, last_updated_by_id=user.id
+    )
+    object.save()
+
+    return object

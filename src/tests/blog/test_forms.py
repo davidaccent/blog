@@ -28,3 +28,10 @@ def test_valid_missing():
     form = BlogForm(DummyPostData(data))
     assert form.validate()
     assert form.data == data
+
+
+def test_unique_contraints(blog):
+    data = {"title": blog.title}
+    form = BlogForm(DummyPostData(data))
+    assert not form.validate()
+    assert "title" in form.errors

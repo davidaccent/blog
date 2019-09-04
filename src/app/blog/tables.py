@@ -22,3 +22,12 @@ class Blog(Base, Timestamp):
 
     def __str__(self):
         return str(self.id)
+
+    @property
+    def urls(self):
+        from app.main import app
+
+        return {
+            "edit": app.url_path_for("blog:edit_blog", blog_id=self.id),
+            "delete": app.url_path_for("blog:delete_blog", blog_id=self.id),
+        }

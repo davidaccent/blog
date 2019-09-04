@@ -21,7 +21,7 @@
                     <td><Strong>{{ blog.title|e }}</Strong></td>
                     <td>{{ blog.author|e }}</td>
                     <td>{{ blog.created_by|e }}</td>
-                    <td>{{ blog.created|e }}</td>
+                    <td>{{ blog.created.strftime('%Y-%m-%d %H:%M:%S')|e }}</td>
                     {% if blog.is_live %}
                         <td style="color:green;"><Strong>{{ "Active" }}</Strong></td>
                     {% else %}
