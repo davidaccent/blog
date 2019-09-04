@@ -1,4 +1,4 @@
-# Starlette Boilerplate Project
+# Starlette Blog Admin from AccentDesign Boilerplate Project
 
 <a href="https://travis-ci.org/accent-starlette/boilerplate">
     <img src="https://travis-ci.org/accent-starlette/boilerplate.svg?branch=master" alt="Build Status">
